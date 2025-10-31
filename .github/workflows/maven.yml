@@ -37,6 +37,4 @@ jobs:
       - name: Run unit tests
         run: mvn -B test
 
-      # (Opcional) Atualiza o grafo de dependências
-      - name: Update dependency graph
-        uses: advanced-security/maven-dependency-submission-action@v4
+      
