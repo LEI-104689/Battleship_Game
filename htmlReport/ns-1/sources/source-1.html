@@ -1,0 +1,145 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Barge</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">iscteiul.ista.battleship</a>
+</div>
+
+<h1>Coverage Summary for Class: Barge (iscteiul.ista.battleship)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Barge</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/**
+&nbsp; * Represents a Barge ship in the Battleship game.
+&nbsp; * &lt;p&gt;
+&nbsp; * A Barge is the smallest possible ship, occupying only one grid cell.
+&nbsp; * It has a fixed size of 1 and a fixed name (&quot;Barca&quot;).
+&nbsp; * Since it consists of a single cell, its orientation (bearing) does not affect
+&nbsp; * how it is placed on the game board.
+&nbsp; * &lt;/p&gt;
+&nbsp; */
+&nbsp;package iscteiul.ista.battleship;
+&nbsp;
+&nbsp;public class Barge extends Ship {
+&nbsp;    /** The size of the Barge (always 1). */
+<b class="fc">&nbsp;    private static final Integer SIZE = 1;</b>
+&nbsp;
+&nbsp;    /** The name of the ship (&quot;Barca&quot;). */
+&nbsp;    private static final String NAME = &quot;Barca&quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new {@code Barge} object.
+&nbsp;     *
+&nbsp;     * @param bearing the orientation of the barge (included for consistency with other ships,
+&nbsp;     *                though not functionally relevant since the barge occupies one cell)
+&nbsp;     * @param pos     the position of the barge on the game grid (its only occupied cell)
+&nbsp;     */
+&nbsp;    public Barge(Compass bearing, IPosition pos) {
+<b class="fc">&nbsp;        super(Barge.NAME, bearing, pos);</b>
+&nbsp;        // A Barge occupies only one position — add that single position to the ship.
+<b class="fc">&nbsp;        getPositions().add(new Position(pos.getRow(), pos.getColumn()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the size of the barge.
+&nbsp;     *
+&nbsp;     * @return the integer value {@code 1}, representing the size of the ship
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Integer getSize() {
+<b class="fc">&nbsp;        return SIZE;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-11-01 01:57</div>
+</div>
+</body>
+</html>
