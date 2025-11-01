@@ -3,6 +3,8 @@ package iscteiul.ista.battleship;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -44,5 +46,40 @@ class IShipTest {
     void testTooCloseTo() {
         IPosition near = new Position(5, 6);
         assertTrue(ship.tooCloseTo(near));
+    }
+
+
+    @Test
+    @DisplayName("getSize deve ser consistente com posições")
+    void testSizeMatchesPositions() {
+        assertEquals(ship.getSize(), ship.getPositions().size());
+    }
+
+
+    @Test
+    @DisplayName("stillFloating reflete hits corretamente")
+    void testFloatingConsistency() {
+        for (IPosition p : ship.getPositions()) {
+            ship.shoot(p);
+        }
+        assertFalse(ship.stillFloating());
+    }
+
+
+    @Test
+    @DisplayName("shoot duas vezes na mesma posição")
+    void testShootIdempotent() {
+        IPosition pos = ship.getPositions().get(0);
+        ship.shoot(pos);
+        ship.shoot(pos);
+        assertTrue(pos.isHit());
+    }
+
+    @ParameterizedTest
+    @EnumSource(Compass.class)
+    void testBargeAllDirections(Compass dir) {
+        IShip b = new Barge(dir, new Position(3,3));
+        assertEquals(dir, b.getBearing());
+        assertEquals(1, b.getSize());
     }
 }
