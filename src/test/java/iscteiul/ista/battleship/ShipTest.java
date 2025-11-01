@@ -231,4 +231,81 @@ class ShipTest {
         );
     }
 
+
+
+    @Test
+    @DisplayName("getTopMostPos e getBottomMostPos devem funcionar corretamente")
+    void testVerticalBoundaries() {
+        Ship caravel = new Caravel(Compass.SOUTH, new Position(1, 1));
+        assertEquals(1, caravel.getTopMostPos());
+        assertEquals(2, caravel.getBottomMostPos());
+    }
+
+    @Test
+    @DisplayName("buildShip deve devolver null para tipo inválido")
+    void testInvalidShipType() {
+        Ship unknown = Ship.buildShip("submarino", Compass.EAST, new Position(2, 2));
+        assertNull(unknown);
+    }
+
+    @Test
+    @DisplayName("shoot fora do navio não deve marcar hit")
+    void testShootOutside() {
+        IPosition target = new Position(9, 9);
+        ship.shoot(target);
+        assertFalse(ship.getPositions().get(0).isHit());
+    }
+
+    @Test
+    @DisplayName("tooCloseTo deve retornar falso para posições distantes")
+    void testTooCloseToFarPosition() {
+        assertFalse(ship.tooCloseTo(new Position(10, 10)));
+    }
+
+    @Test
+    @DisplayName("Construir navio com parâmetros nulos deve falhar (assert)")
+    void testConstructorWithNulls() {
+        assertThrows(AssertionError.class, () -> new Barge(null, null));
+    }
+
+
+    @Test
+    @DisplayName("Deve construir um navio corretamente")
+    void testShipCreation() {
+        assertNotNull(ship);
+        assertEquals(3, ship.getPositions().get(0).getRow());
+    }
+
+    @AfterEach
+    void tearDown() {
+        System.out.println("🧹 Teste concluído.");
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        System.out.println("✅ Todos os testes de Ship finalizados!");
+    }
+
+    @Nested
+    @DisplayName("Testes de comportamento do método shoot()")
+    class ShootTests {
+
+        @Test
+        @DisplayName("Deve marcar posição como atingida")
+        void testShootHit() {
+            IPosition target = ship.getPositions().get(0);
+            ship.shoot(target);
+            assertTrue(target.isHit());
+        }
+
+        @Test
+        @DisplayName("Não deve marcar hit se posição for fora do navio")
+        void testShootMiss() {
+            Position target = new Position(10, 10);
+            ship.shoot(target);
+            assertFalse(ship.getPositions().get(0).isHit());
+        }
+    }
+
+
 }
